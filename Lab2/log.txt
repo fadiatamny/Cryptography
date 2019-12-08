@@ -1,0 +1,2 @@
+seed divided to 15 bits is 16838
+seed divided to 15 bits is 5758
