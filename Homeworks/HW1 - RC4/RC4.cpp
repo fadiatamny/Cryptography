@@ -1,14 +1,4 @@
-//
-//  RC4.cpp
-//  hw1 rc4
-//
-//  Created by or eitan on 07/12/2019.
-//  Copyright © 2019 or eitan. All rights reserved.
-//
-
 #include "RC4.hpp"
-
-using namespace std;
 
 RC4::RC4(__uint128_t *key)
 {
