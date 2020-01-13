@@ -1,6 +1,8 @@
 {
     "python.linting.enabled": true,
     "files.associations": {
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "ostream": "cpp",
+        "vector": "cpp"
     }
 }
