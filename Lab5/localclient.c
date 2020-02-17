@@ -33,31 +33,26 @@ int main(void)
 	printf("Successfully connected.\n");
 	uint64_t n = 0; //rand() % PUZZLENUM ;
 
-	struct pz ps;
+	uint64_t data[5];
 	Puzzle p;
 	DecPuzzle* d;
+
 	for(uint16_t i = 0 ; i < PUZZLENUM ; ++i)
 	{
-		printf("%d\n",sizeof(struct pz));
-		if ((nrecv = recv(sock, &ps, sizeof(struct pz), 0)) < 0)
+		if ((nrecv = recv(sock, &p, sizeof(Puzzle), 0)) < 0)
 		{
 			perror("recv");
-			printf("%d",nrecv);
 			return 1;
 		}
-		p.data[0] = ps.data[0];
-		p.data[1] = ps.data[1];
-		p.data[2] = ps.data[2];
-		p.data[3] = ps.data[3];
-		p.data[4] = ps.data[4];
-		
-		printf("test");
-		printPuzzle(p);
-		printf('\n');
+
 		if( n  ==  i)
 		{
-			printf("1\n");
 			d = decPuzzle(p);
+			if(NULL == d)
+			{
+				perror("Couldnt solve the puzzle ERROR OCCURED");
+				return -1;
+			}
 		}
 	}
 

@@ -8,6 +8,7 @@
 #include "crypt.h"
 
 #define PUZZLENUM 1
+#define MAXPERMUTATION 2^PUZZLENUM
 
 typedef struct puzzle{
     uint64_t data[5];

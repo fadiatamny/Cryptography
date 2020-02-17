@@ -54,16 +54,7 @@ int main(void)
 
 	for(uint16_t i = 0; i < PUZZLENUM; ++i)
 	{
-		printPuzzle(p[i]);
-		printf("\n");
-		struct pz myp;
-		myp.data[0] = p[i].data[0];
-		myp.data[1] = p[i].data[1];
-		myp.data[2] = p[i].data[2];
-		myp.data[3] = p[i].data[3];
-		myp.data[4] = p[i].data[4];
-
-		if (send(newfd, &myp, sizeof(struct pz), 0) < 0)
+		if (send(newfd, &p[i], sizeof(Puzzle), 0) < 0)
 		{
 			perror("send");
 			return 1;
