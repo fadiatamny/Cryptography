@@ -1,5 +1,17 @@
 #include "merkel.h"
 
+void printPuzzles(Puzzle* p)
+{
+    for(int i = 0; i < PUZZLENUM; ++i)
+        printPuzzle(p[i]);
+    printf("\n");
+}
+
+void printPuzzle(Puzzle p)
+{
+    printf("%ld %ld %ld %ld %ld\t", p.data[0], p.data[1], p.data[2], p.data[3], p.data[4]);
+}
+
 Puzzle* genPuzzles()
 {
     Puzzle* ps = (Puzzle*)malloc(PUZZLENUM*sizeof(Puzzle));
@@ -14,14 +26,14 @@ Puzzle* genPuzzles()
         uint64_t xi2 = gen_random_64();
         char c[8] = "PID ";
 
-        key_set* keys = (key_set*)malloc(16*sizeof(key_set));
+        key_set* keys = (key_set*)malloc(17*sizeof(key_set));
 
-        generate_sub_keys((unsigned char*)pi,keys);
-        process_message((unsigned char*)c,(unsigned char*)ps[i].data[0],keys,ENCRYPTION_MODE);
-        process_message((unsigned char*)xi1,(unsigned char*)ps[i].data[1],keys,ENCRYPTION_MODE);
-        process_message((unsigned char*)xi2,(unsigned char*)ps[i].data[2],keys,ENCRYPTION_MODE);
-        process_message((unsigned char*)ki1,(unsigned char*)ps[i].data[3],keys,ENCRYPTION_MODE);
-        process_message((unsigned char*)ki2,(unsigned char*)ps[i].data[4],keys,ENCRYPTION_MODE);
+        generate_sub_keys((unsigned char*)&pi,keys);
+        process_message((unsigned char*)c,(unsigned char*)&ps[i].data[0],keys,ENCRYPTION_MODE);
+        process_message((unsigned char*)&xi1,(unsigned char*)&ps[i].data[1],keys,ENCRYPTION_MODE);
+        process_message((unsigned char*)&xi2,(unsigned char*)&ps[i].data[2],keys,ENCRYPTION_MODE);
+        process_message((unsigned char*)&ki1,(unsigned char*)&ps[i].data[3],keys,ENCRYPTION_MODE);
+        process_message((unsigned char*)&ki2,(unsigned char*)&ps[i].data[4],keys,ENCRYPTION_MODE);
     }
 
     return ps;

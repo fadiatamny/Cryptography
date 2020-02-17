@@ -9,11 +9,11 @@
 
 #define PUZZLENUM 1
 
-typedef struct{
+typedef struct puzzle{
     uint64_t data[5];
 } Puzzle;
 
-typedef struct{
+typedef struct decpuzzle{
     uint64_t message1;
     uint64_t message2;
     uint64_t key1;
@@ -21,5 +21,6 @@ typedef struct{
 } DecPuzzle;
 
 Puzzle* genPuzzles();
+void printPuzzle(Puzzle);
 
 DecPuzzle* decPuzzle(Puzzle);
