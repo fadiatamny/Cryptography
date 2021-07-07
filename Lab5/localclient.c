@@ -14,6 +14,10 @@
 #define PORT 0x0da2
 #define IP_ADDR 0x7f000001
 
+struct pz{
+    uint64_t data[5];
+};
+
 int main(void)
 {
 	int sock = socket(AF_INET, SOCK_STREAM, 0), nrecv;
@@ -27,11 +31,11 @@ int main(void)
 		return 1;
 	}
 	printf("Successfully connected.\n");
-	uint64_t n = rand() % PUZZLENUM ;
+	uint64_t n = 0; //rand() % PUZZLENUM ;
 
+	uint64_t data[5];
 	Puzzle p;
 	DecPuzzle* d;
-			printf("1\n");
 
 	for(uint16_t i = 0 ; i < PUZZLENUM ; ++i)
 	{
@@ -40,10 +44,15 @@ int main(void)
 			perror("recv");
 			return 1;
 		}
+
 		if( n  ==  i)
 		{
-			printf("1\n");
 			d = decPuzzle(p);
+			if(NULL == d)
+			{
+				perror("Couldnt solve the puzzle ERROR OCCURED");
+				return -1;
+			}
 		}
 	}
 

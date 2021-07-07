@@ -15,6 +15,10 @@
 #define IP_ADDR 0x7f000001
 #define QUEUE_LEN 20
 
+struct pz{
+    uint64_t data[5];
+};
+
 int main(void)
 {
 	int listenS = socket(AF_INET, SOCK_STREAM, 0);
@@ -47,10 +51,9 @@ int main(void)
 	}
 	printf("Sending data to client %d\n", newfd);
 	Puzzle* p = genPuzzles();
-	printf("1");
+
 	for(uint16_t i = 0; i < PUZZLENUM; ++i)
 	{
-		printf("1 %d\n",i);
 		if (send(newfd, &p[i], sizeof(Puzzle), 0) < 0)
 		{
 			perror("send");
@@ -58,7 +61,7 @@ int main(void)
 		}
 	}
 	uint64_t keys[2] = {0};
-	if ((newfd = recv(listenS, keys , sizeof(keys), 0)) < 0)
+	if ((newfd = recv(newfd, keys , sizeof(keys), 0)) < 0)
 	{
 		perror("recv");
 		return 1;
